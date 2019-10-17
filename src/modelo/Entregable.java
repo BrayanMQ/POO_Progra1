@@ -10,11 +10,11 @@ package modelo;
  * @author Ronny
  */
 public class Entregable {
-    private int id;
-    private double preso;
-    private boolean estado;
-    private String descripcion;
-    private String remitente;
+    protected int id;
+    protected double preso;
+    protected boolean estado;
+    protected String descripcion;
+    protected String remitente;
 
     public Entregable() {
     }
