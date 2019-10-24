@@ -15,6 +15,10 @@ public class Controlador {
     private static Controlador controlador;
     private Counter counter;
     
+    /**
+     * Crea la instancia Singleton del Controlador
+     * @return La instacncia Singleton de controlador
+     */
     public static Controlador getSingletonInstance() {
         if (controlador == null){
             controlador = new Controlador();
@@ -22,6 +26,13 @@ public class Controlador {
         return controlador;
     }
     
+    /**
+     * Crea la instancia del Counter con sus respectivos parámetros
+     * @param pNombre
+     * @param pCedulaJuridica
+     * @param direccion
+     * @param pCantidadCasilleros 
+     */
     public void crearCounter(String pNombre, String pCedulaJuridica, String direccion, String pCantidadCasilleros){
         counter = new Counter(pNombre, Integer.parseInt(pCedulaJuridica), direccion, Integer.parseInt(pCantidadCasilleros));
     }
