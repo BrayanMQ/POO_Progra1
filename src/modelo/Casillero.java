@@ -16,8 +16,13 @@ public class Casillero {
     private boolean estado;
     private ArrayList <Entregable> listaEntregables;
 
-    public Casillero() {
+    public Casillero(int id) {
+        this.id = id;
+        this.estado = false;
+        this.listaEntregables = new ArrayList<>();
     }
+
+    
 
     public int getId() {
         return id;

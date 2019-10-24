@@ -22,8 +22,18 @@ public class Cliente {
     private Casillero casillero;
     private TCliente tipoCliente;
 
-    public Cliente() {
+    public Cliente(int id, String nombre, String correo, int telefono, String direccion, TSexo sexo, Date fechaNacimiento, Casillero casillero) {
+        this.id = id;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.sexo = sexo;
+        this.fechaNacimiento = fechaNacimiento;
+        this.casillero = casillero;
     }
+
+    
 
     public int getId() {
         return id;
@@ -96,6 +106,25 @@ public class Cliente {
     public void setTipoCliente(TCliente tipoCliente) {
         this.tipoCliente = tipoCliente;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cliente other = (Cliente) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+    
     
     
 }
