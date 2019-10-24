@@ -36,8 +36,12 @@ public class crearRevista extends javax.swing.JDialog {
         lbl_peso = new javax.swing.JLabel();
         lbl_descripcion = new javax.swing.JLabel();
         lbl_remitente = new javax.swing.JLabel();
-        btn_crearPaquete = new javax.swing.JButton();
+        btn_crearRevista = new javax.swing.JButton();
         lbl_error = new javax.swing.JLabel();
+        lbl_tipoRevista = new javax.swing.JLabel();
+        lbl_esCatalogo = new javax.swing.JLabel();
+        checkB_esCatalogo = new javax.swing.JCheckBox();
+        txt_tema = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -55,35 +59,48 @@ public class crearRevista extends javax.swing.JDialog {
 
         lbl_remitente.setText("Remitente:");
 
-        btn_crearPaquete.setText("Crear paquete");
+        btn_crearRevista.setText("Crear revista");
+
+        lbl_tipoRevista.setText("Tema de la revista:");
+
+        lbl_esCatalogo.setText("Es catálogo:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbl_id)
-                                .addComponent(lbl_peso)
-                                .addComponent(lbl_descripcion)
-                                .addComponent(lbl_remitente))
-                            .addGap(70, 70, 70)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txt_id)
-                                .addComponent(txt_peso)
-                                .addComponent(txt_descripcion)
-                                .addComponent(txt_remitente, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(lbl_error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(btn_crearPaquete)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lbl_error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_id)
+                                    .addComponent(lbl_peso)
+                                    .addComponent(lbl_descripcion)
+                                    .addComponent(lbl_remitente)
+                                    .addComponent(lbl_tipoRevista)
+                                    .addComponent(lbl_esCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(53, 53, 53)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txt_id)
+                                            .addComponent(txt_peso)
+                                            .addComponent(txt_descripcion)
+                                            .addComponent(txt_remitente, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                                            .addComponent(txt_tema)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(checkB_esCatalogo)
+                                        .addGap(24, 24, 24)))))
+                        .addContainerGap(34, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_crearRevista)
+                        .addGap(85, 85, 85))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,10 +122,18 @@ public class crearRevista extends javax.swing.JDialog {
                     .addComponent(txt_remitente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_remitente))
                 .addGap(18, 18, 18)
-                .addComponent(lbl_error, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-                .addGap(37, 37, 37)
-                .addComponent(btn_crearPaquete)
-                .addGap(37, 37, 37))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_tipoRevista)
+                    .addComponent(txt_tema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkB_esCatalogo)
+                    .addComponent(lbl_esCatalogo))
+                .addGap(13, 13, 13)
+                .addComponent(lbl_error, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_crearRevista)
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -162,15 +187,19 @@ public class crearRevista extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_crearPaquete;
+    private javax.swing.JButton btn_crearRevista;
+    private javax.swing.JCheckBox checkB_esCatalogo;
     private javax.swing.JLabel lbl_descripcion;
     private javax.swing.JLabel lbl_error;
+    private javax.swing.JLabel lbl_esCatalogo;
     private javax.swing.JLabel lbl_id;
     private javax.swing.JLabel lbl_peso;
     private javax.swing.JLabel lbl_remitente;
+    private javax.swing.JLabel lbl_tipoRevista;
     private javax.swing.JTextField txt_descripcion;
     private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_peso;
     private javax.swing.JTextField txt_remitente;
+    private javax.swing.JTextField txt_tema;
     // End of variables declaration//GEN-END:variables
 }

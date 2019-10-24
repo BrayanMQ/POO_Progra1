@@ -24,35 +24,47 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_id" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_peso" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_descripcion" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_remitente" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txt_id" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txt_peso" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txt_descripcion" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txt_remitente" alignment="0" pref="85" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lbl_error" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                      <Component id="btn_crearPaquete" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="lbl_error" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lbl_id" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_peso" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_descripcion" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_remitente" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_tipoRevista" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_esCatalogo" min="-2" pref="75" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txt_id" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txt_peso" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txt_descripcion" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txt_remitente" alignment="0" pref="85" max="32767" attributes="0"/>
+                                          <Component id="txt_tema" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="checkB_esCatalogo" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="34" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btn_crearRevista" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="34" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -80,10 +92,20 @@
                   <Component id="lbl_remitente" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="lbl_error" pref="69" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-              <Component id="btn_crearPaquete" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_tipoRevista" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_tema" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="checkB_esCatalogo" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_esCatalogo" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+              <Component id="lbl_error" pref="39" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="btn_crearRevista" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -120,12 +142,26 @@
         <Property name="text" type="java.lang.String" value="Remitente:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btn_crearPaquete">
+    <Component class="javax.swing.JButton" name="btn_crearRevista">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Crear paquete"/>
+        <Property name="text" type="java.lang.String" value="Crear revista"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_error">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_tipoRevista">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tema de la revista:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_esCatalogo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Es cat&#xe1;logo:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="checkB_esCatalogo">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_tema">
     </Component>
   </SubComponents>
 </Form>
