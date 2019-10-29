@@ -117,6 +117,11 @@ public class GestorCliente {
         return cliente;
     }
     
+    /**
+     * Elimina el cliente de la listaClientes del counter
+     * @param pId
+     * @return Retorna true si se logró eliminar, de lo contrario retornará false
+     */
     public boolean eliminarCliente(String pId){
         int index = buscarCliente(pId);
         if (index >= 0) {
