@@ -1,20 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vista;
 
-/**
- *
- * @author dark1
- */
+import control.Controlador;
+
 public class Counter extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Counter
-     */
     public Counter() {
+        Controlador.getSingletonInstance();
         initComponents();
     }
 
@@ -67,6 +59,11 @@ public class Counter extends javax.swing.JFrame {
         lbl_cantidadCasilleros.setText("Cantidad de casilleros:");
 
         btn_crear.setText("Crear");
+        btn_crear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_crearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,6 +133,10 @@ public class Counter extends javax.swing.JFrame {
     private void txt_cantidadCasillerosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cantidadCasillerosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_cantidadCasillerosActionPerformed
+
+    private void btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearActionPerformed
+        Controlador.getSingletonInstance().crearCounter(txt_nombre.getText(), txt_cedulaJuridica.getText(), txt_direccion.getText(), txt_cantidadCasilleros.getText());
+    }//GEN-LAST:event_btn_crearActionPerformed
 
     /**
      * @param args the command line arguments
