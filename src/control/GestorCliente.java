@@ -26,7 +26,7 @@ public class GestorCliente {
      * @param pFechaNacimiento
      * @return Retorna true si existe un error al crear un cliente, caso contrario retornará false
      */
-    public boolean crearCliente(String pId, String pNombre, String pCorreo,
+    public boolean registrarCliente(String pId, String pNombre, String pCorreo,
         String pTelefono, String pDireccion, TSexo pSexo, Date pFechaNacimiento){
         
         boolean error = false;
@@ -90,6 +90,44 @@ public class GestorCliente {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(pCorreo);
         return matcher.matches();
+    }
+    
+    /**
+     * Busca el cliente en la lista de clientes del counter
+     * @param pId
+     * @return Si encuentra el cliente, retorna el index, de lo contrario retorna -1
+     */
+    public int buscarCliente(String pId){
+        int index = -1;
+        if (Controlador.getSingletonInstance().validarDigitos(pId)) {
+            int id = Integer.parseInt(pId);
+            Cliente cliente = new Cliente(id);
+            index = Controlador.getSingletonInstance().getCounter().getListaClientes().indexOf(cliente);
+        }
+        return index;
+    } 
+    
+    /**
+     * Obtiene el cliente de la listaClientes del counter
+     * @param pIndex
+     * @return Retorna el objeto cliente 
+     */
+    public Cliente consultarDatosCliente(int pIndex){
+        Cliente cliente = Controlador.getSingletonInstance().getCounter().getListaClientes().get(pIndex);
+        return cliente;
+    }
+    
+    public boolean eliminarCliente(String pId){
+        int index = buscarCliente(pId);
+        if (index >= 0) {
+            Cliente cliente = Controlador.getSingletonInstance().getCounter().getListaClientes().remove(index);
+            Casillero casillero = cliente.getCasillero();
+            casillero.limpiarCasillero();
+            Controlador.getSingletonInstance().getCounter().getListaCasillerosOcupados().remove(casillero);
+            Controlador.getSingletonInstance().getCounter().getListaCasillerosDisponibles().add(casillero);
+            return true;
+        } 
+        return false;
     }
     
     
