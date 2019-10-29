@@ -135,7 +135,22 @@ public class Counter extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_cantidadCasillerosActionPerformed
 
     private void btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearActionPerformed
-        Controlador.getSingletonInstance().crearCounter(txt_nombre.getText(), txt_cedulaJuridica.getText(), txt_direccion.getText(), txt_cantidadCasilleros.getText());
+        boolean cedulaJuridicaValida = true;
+        boolean cantidadCasillerosValida = true;
+        
+        if (Controlador.getSingletonInstance().validarDigitos(txt_cedulaJuridica.getText())) {
+            txt_cedulaJuridica.setText("La cédula jurídica debe ser un dígito mayor a 0.");
+            cedulaJuridicaValida = false;
+        }
+        if (Controlador.getSingletonInstance().validarDigitos(txt_cantidadCasilleros.getText())) {
+            txt_cantidadCasilleros.setText("La cantidad de casilleros debe ser un dígito mayor a 0.");
+            cantidadCasillerosValida = false;
+        }
+        
+        if (cedulaJuridicaValida && cantidadCasillerosValida) {
+            Controlador.getSingletonInstance().crearCounter(txt_nombre.getText(), txt_cedulaJuridica.getText(), txt_direccion.getText(), txt_cantidadCasilleros.getText());
+        }
+        
     }//GEN-LAST:event_btn_crearActionPerformed
 
     /**

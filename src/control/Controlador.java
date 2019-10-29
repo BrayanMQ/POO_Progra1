@@ -36,6 +36,13 @@ public class Controlador {
     public void crearCounter(String pNombre, String pCedulaJuridica, String direccion, String pCantidadCasilleros){
         counter = new Counter(pNombre, Integer.parseInt(pCedulaJuridica), direccion, Integer.parseInt(pCantidadCasilleros));
     }
+    
+    public boolean validarDigitos(String pDigito){
+        if (pDigito.matches("\\d") && Integer.parseInt(pDigito) > 0) {
+            return true;
+        }
+        return false;
+    }
 
     public Counter getCounter() {
         return counter;
