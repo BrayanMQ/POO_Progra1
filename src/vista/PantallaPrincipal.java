@@ -135,11 +135,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             Cliente cliente = Controlador.getSingletonInstance().getGestorCliente().consultarDatosCliente(index);
             JOptionPane.showMessageDialog(this, "Identificador: " + cliente.getId()+ "\n" + 
                     "Nombre: " + cliente.getNombre() + "\n" + 
-                    "Correo: " + cliente.getNombre() + "\n" + 
-                    "Teléfono: " + cliente.getNombre() + "\n" +
-                    "Dirección: " + cliente.getNombre() + "\n" +
-                    "Sexo: " + cliente.getSexo()+ "\n" +
-                    "Fecha de nacimiento: " + cliente.getNombre(), "Consultar cliente", JOptionPane.QUESTION_MESSAGE);
+                    "Correo: " + cliente.getCorreo()+ "\n" + 
+                    "Teléfono: " + cliente.getTelefono() + "\n" +
+                    "Dirección: " + cliente.getDireccion()+ "\n" +
+                    "Sexo: " + cliente.getSexo().toString()+ "\n" +
+                    "Fecha de nacimiento: " + cliente.getFechaNacimiento(), "Consultar cliente", JOptionPane.QUESTION_MESSAGE);
         } else {
         
         JOptionPane.showMessageDialog(this, "No se ha encontrado el cliente con id " + id + ".", "Consultar cliente", JOptionPane.INFORMATION_MESSAGE);
