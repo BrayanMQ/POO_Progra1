@@ -1,8 +1,11 @@
 
 package vista;
 
+import control.Controlador;
 import javax.swing.JOptionPane;
+import modelo.Cliente;
 import modelo.IConstants;
+import vista.modificarCliente;
 
 public class PantallaPrincipal extends javax.swing.JFrame {
 
@@ -103,6 +106,18 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
     private void menuItem_modificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_modificarClienteActionPerformed
         String id = JOptionPane.showInputDialog(this, "Indique el identificador de la persona que desea modificar.", "Modificar cliente", JOptionPane.QUESTION_MESSAGE);
+        
+        int index = Controlador.getSingletonInstance().getGestorCliente().buscarCliente(id);
+        
+        if (index >= 0) {
+            Cliente cliente = Controlador.getSingletonInstance().getGestorCliente().consultarDatosCliente(index);
+            new modificarCliente(this, rootPaneCheckingEnabled, cliente).setVisible(true);
+        } else {
+        
+        JOptionPane.showMessageDialog(this, "No se ha encontrado el cliente con id " + id + ".");
+        
+        }
+        
     }//GEN-LAST:event_menuItem_modificarClienteActionPerformed
 
     private void menuItem_consultarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_consultarClienteActionPerformed

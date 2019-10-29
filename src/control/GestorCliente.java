@@ -14,7 +14,6 @@ import modelo.TSexo;
  * @author Ronny, Brayan, Isaac
  */
 public class GestorCliente {
-   
     /**
      * Crea un cliente junto con su respectivo casillero y los añade a las listas clientes/casilleros de la clase Counter
      * @param pId 
@@ -32,9 +31,6 @@ public class GestorCliente {
         boolean error = false;
         
         if (validarTelefono(pTelefono)) {
-            error = true;
-        }
-        if (validarIdClienteExistente(pId)) {
             error = true;
         }
         if (validarCorreo(pCorreo)) {
@@ -63,18 +59,6 @@ public class GestorCliente {
      */
     public boolean validarTelefono(String pTelefono){
         if (pTelefono.matches("\\d8")) {
-            return true;
-        }
-        return false;
-    }
-    
-    /**
-     * Valida si ya existe un cliente con el id que se recibe
-     * @param pId
-     * @return Retornará true si no existe un cliente con ese id, caso contrario retornará false 
-     */
-    public boolean validarIdClienteExistente(String pId){
-        if (!Controlador.getSingletonInstance().getCounter().getListaClientes().equals(Integer.parseInt(pId))) {
             return true;
         }
         return false;
@@ -133,5 +117,18 @@ public class GestorCliente {
             return true;
         } 
         return false;
+    }
+    
+    public void modificarCliente(String pId, String pNombre, String pCorreo,
+        String pTelefono, String pDireccion, TSexo pSexo, Date pFechaNacimiento, Cliente cliente){
+
+        cliente.setId(Integer.parseInt(pId));
+        cliente.setNombre(pNombre);
+        cliente.setCorreo(pCorreo);
+        cliente.setTelefono(Integer.parseInt(pTelefono));
+        cliente.setDireccion(pDireccion);
+        cliente.setSexo(pSexo);
+        cliente.setFechaNacimiento(pFechaNacimiento);
+        
     }
 }

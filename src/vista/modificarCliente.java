@@ -5,17 +5,25 @@
  */
 package vista;
 
+import modelo.Cliente;
+
 /**
  *
  * @author dark1
  */
 public class modificarCliente extends javax.swing.JDialog {
-
+     private static Cliente cliente;
     /**
      * Creates new form modificarCliente
      */
-    public modificarCliente(java.awt.Frame parent, boolean modal) {
+    public modificarCliente(java.awt.Frame parent, boolean modal, Cliente cliente) {
         super(parent, modal);
+        this.cliente = cliente;
+        txt_identificador.setText((String.valueOf(cliente.getId())));
+        txt_nombre.setText(cliente.getNombre());
+        txt_telefono.setText((String.valueOf(cliente.getTelefono())));
+        txt_correo.setText(cliente.getCorreo());
+        txt_direccion.setText(cliente.getDireccion());
         initComponents();
     }
 
@@ -189,7 +197,7 @@ public class modificarCliente extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                modificarCliente dialog = new modificarCliente(new javax.swing.JFrame(), true);
+                modificarCliente dialog = new modificarCliente(new javax.swing.JFrame(), true, cliente);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

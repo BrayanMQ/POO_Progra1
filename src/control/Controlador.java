@@ -34,7 +34,11 @@ public class Controlador implements IConstants{
         }
         return controlador;
     }
-    
+
+    public GestorCliente getGestorCliente() {
+        return gestorCliente;
+    }
+
     /**
      * Crea la instancia del Counter con sus respectivos parámetros
      * @param pNombre
