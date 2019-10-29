@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vista;
 
 import javax.swing.JOptionPane;
+import modelo.IConstants;
 
-/**
- *
- * @author dark1
- */
 public class PantallaPrincipal extends javax.swing.JFrame {
 
     /**
@@ -116,7 +109,17 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItem_eliminarClienteActionPerformed
 
     private void menuItem_recepcionArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_recepcionArticulosActionPerformed
-        // TODO add your handling code here:
+        Object opcion = JOptionPane.showInputDialog(null,"Selecciona un tipo de paquete", "Elegir tipo de paquete",
+                JOptionPane.QUESTION_MESSAGE,null,IConstants.TIPOS_ENTREGABLE_COMBOBOX, IConstants.TIPOS_ENTREGABLE_COMBOBOX[0]);
+        
+        if (opcion.toString().equalsIgnoreCase("Sobre")) {
+            new crearSobre(this, rootPaneCheckingEnabled).setVisible(true);
+        } else if (opcion.toString().equalsIgnoreCase("Paquete")) {
+            new crearPaquete(this, rootPaneCheckingEnabled).setVisible(true);
+        } else if (opcion.toString().equalsIgnoreCase("Revista")) {
+            new crearRevista(this, rootPaneCheckingEnabled).setVisible(true);
+        }
+        
     }//GEN-LAST:event_menuItem_recepcionArticulosActionPerformed
 
     /**

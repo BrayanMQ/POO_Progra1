@@ -29,6 +29,7 @@ public class Counter extends javax.swing.JFrame {
         lbl_direccion = new javax.swing.JLabel();
         lbl_cantidadCasilleros = new javax.swing.JLabel();
         btn_crear = new javax.swing.JButton();
+        lbl_error = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,32 +71,35 @@ public class Counter extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(lbl_creacionCounter))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(btn_crear)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_cantidadCasilleros)
-                            .addComponent(lbl_cedulaJuridica))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_cantidadCasilleros)
-                            .addComponent(txt_direccion)
-                            .addComponent(txt_cedulaJuridica)
-                            .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_error, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_cantidadCasilleros)
+                                    .addComponent(lbl_cedulaJuridica))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_cantidadCasilleros)
+                                    .addComponent(txt_direccion)
+                                    .addComponent(txt_cedulaJuridica)
+                                    .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(57, 57, 57))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(btn_crear))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(lbl_creacionCounter)))
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,9 +122,11 @@ public class Counter extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_cantidadCasilleros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_cantidadCasilleros))
-                .addGap(32, 32, 32)
+                .addGap(26, 26, 26)
+                .addComponent(lbl_error, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btn_crear)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -139,11 +145,11 @@ public class Counter extends javax.swing.JFrame {
         boolean cantidadCasillerosValida = true;
         
         if (Controlador.getSingletonInstance().validarDigitos(txt_cedulaJuridica.getText())) {
-            txt_cedulaJuridica.setText("La cédula jurídica debe ser un dígito mayor a 0.");
+            lbl_error.setText("La cédula jurídica debe ser un dígito mayor a 0.");
             cedulaJuridicaValida = false;
         }
         if (Controlador.getSingletonInstance().validarDigitos(txt_cantidadCasilleros.getText())) {
-            txt_cantidadCasilleros.setText("La cantidad de casilleros debe ser un dígito mayor a 0.");
+            lbl_error.setText("La cantidad de casilleros debe ser un dígito mayor a 0.");
             cantidadCasillerosValida = false;
         }
         
@@ -194,6 +200,7 @@ public class Counter extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_cedulaJuridica;
     private javax.swing.JLabel lbl_creacionCounter;
     private javax.swing.JLabel lbl_direccion;
+    private javax.swing.JLabel lbl_error;
     private javax.swing.JLabel lbl_nombre;
     private javax.swing.JTextField txt_cantidadCasilleros;
     private javax.swing.JTextField txt_cedulaJuridica;
