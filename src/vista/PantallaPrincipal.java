@@ -5,6 +5,7 @@ import control.Controlador;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
 import modelo.IConstants;
+import modelo.TSexo;
 import vista.modificarCliente;
 
 public class PantallaPrincipal extends javax.swing.JFrame {
@@ -40,6 +41,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         subMenu_clientes.setText("Clientes");
 
         menuItem_registrarCliente.setText("Registrar cliente");
+        menuItem_registrarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItem_registrarClienteActionPerformed(evt);
+            }
+        });
         subMenu_clientes.add(menuItem_registrarCliente);
 
         menuItem_modificarCliente.setText("Modificar cliente");
@@ -114,7 +120,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             new modificarCliente(this, rootPaneCheckingEnabled, cliente).setVisible(true);
         } else {
         
-        JOptionPane.showMessageDialog(this, "No se ha encontrado el cliente con id " + id + ".");
+        JOptionPane.showMessageDialog(this, "No se ha encontrado el cliente con id " + id + ".", "Modificar cliente", JOptionPane.INFORMATION_MESSAGE);
         
         }
         
@@ -122,16 +128,45 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
     private void menuItem_consultarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_consultarClienteActionPerformed
         String id = JOptionPane.showInputDialog(this, "Indique el identificador de la persona que desea consultar.", "Consultar cliente", JOptionPane.QUESTION_MESSAGE);
+        
+        int index = Controlador.getSingletonInstance().getGestorCliente().buscarCliente(id);
+        
+        if (index >= 0) {
+            Cliente cliente = Controlador.getSingletonInstance().getGestorCliente().consultarDatosCliente(index);
+            JOptionPane.showMessageDialog(this, "Identificador: " + cliente.getId()+ "\n" + 
+                    "Nombre: " + cliente.getNombre() + "\n" + 
+                    "Correo: " + cliente.getNombre() + "\n" + 
+                    "Teléfono: " + cliente.getNombre() + "\n" +
+                    "Dirección: " + cliente.getNombre() + "\n" +
+                    "Sexo: " + cliente.getSexo()+ "\n" +
+                    "Fecha de nacimiento: " + cliente.getNombre(), "Consultar cliente", JOptionPane.QUESTION_MESSAGE);
+        } else {
+        
+        JOptionPane.showMessageDialog(this, "No se ha encontrado el cliente con id " + id + ".", "Consultar cliente", JOptionPane.INFORMATION_MESSAGE);
+        
+        }
+        
     }//GEN-LAST:event_menuItem_consultarClienteActionPerformed
 
     private void menuItem_eliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_eliminarClienteActionPerformed
         String id = JOptionPane.showInputDialog(this, "Indique el identificador de la persona que desea eliminar.", "Eliminar cliente", JOptionPane.QUESTION_MESSAGE);
+        
+        int index = Controlador.getSingletonInstance().getGestorCliente().buscarCliente(id);
+        
+        if (index >= 0) {
+            Controlador.getSingletonInstance().getGestorCliente().eliminarCliente(id);
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "No se ha encontrado el cliente con id " + id + ".", "Eliminar cliente", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
     }//GEN-LAST:event_menuItem_eliminarClienteActionPerformed
 
     private void menuItem_recepcionArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_recepcionArticulosActionPerformed
         String casillero = JOptionPane.showInputDialog(this, 
                 "Digite el número de casillero que desea buscar.", 
                 "Registrar artículos", JOptionPane.QUESTION_MESSAGE);
+        
         
         Object opcion = JOptionPane.showInputDialog(null,"Selecciona un tipo "
                 + "de paquete", "Elegir tipo de paquete",
@@ -158,6 +193,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_menuItem_retiroArticulosActionPerformed
+
+    private void menuItem_registrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_registrarClienteActionPerformed
+        new crearCliente(this, rootPaneCheckingEnabled).setVisible(true);
+    }//GEN-LAST:event_menuItem_registrarClienteActionPerformed
 
     /**
      * @param args the command line arguments
