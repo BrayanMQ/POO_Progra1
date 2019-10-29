@@ -18,6 +18,11 @@ import modelo.IConstants;
 public class Controlador implements IConstants{
     private static Controlador controlador;
     private Counter counter;
+    private GestorCliente gestorCliente;
+
+    public Controlador() {
+        this.gestorCliente = new GestorCliente();
+    }
     
     /**
      * Crea la instancia Singleton del Controlador

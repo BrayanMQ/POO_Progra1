@@ -134,6 +134,4 @@ public class GestorCliente {
         } 
         return false;
     }
-    
-    
 }

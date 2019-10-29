@@ -22,6 +22,10 @@ public class Cliente {
     private Casillero casillero;
     private TCliente tipoCliente;
 
+    public Cliente(int id) {
+        this.id = id;
+    }
+
     public Cliente(int id, String nombre, String correo, int telefono, String direccion, TSexo sexo, Date fechaNacimiento, Casillero casillero) {
         this.id = id;
         this.nombre = nombre;
