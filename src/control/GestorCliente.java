@@ -1,6 +1,8 @@
 
 package control;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,7 +28,7 @@ public class GestorCliente {
      * @return Retorna true si existe un error al crear un cliente, caso contrario retornará false
      */
     public boolean registrarCliente(String pId, String pNombre, String pCorreo,
-        String pTelefono, String pDireccion, TSexo pSexo, Date pFechaNacimiento){
+        String pTelefono, String pDireccion, String pSexo, Date pFechaNacimiento){
         
         boolean error = false;
         
@@ -41,9 +43,9 @@ public class GestorCliente {
             
             Casillero casillero = Controlador.getSingletonInstance().getCounter().getListaCasillerosDisponibles().poll();
             casillero.setEstado(true); //Casillero ocupado
-            
+            TSexo sexo = convertirTSexo(pSexo);
             Cliente cliente =  new Cliente(Integer.parseInt(pId), pNombre, 
-                    pCorreo, Integer.parseInt(pTelefono), pDireccion, pSexo, pFechaNacimiento, casillero);
+                    pCorreo, Integer.parseInt(pTelefono), pDireccion, sexo, pFechaNacimiento, casillero);
             
             Controlador.getSingletonInstance().getCounter().getListaCasillerosOcupados().add(casillero);
             Controlador.getSingletonInstance().getCounter().getListaClientes().add(cliente);
@@ -53,15 +55,31 @@ public class GestorCliente {
     }
     
     /**
+     * Convierte el pSexo en TSexo
+     * @param pSexo
+     * @return Retorna la variable sexo en TSexo
+     */
+    public TSexo convertirTSexo(String pSexo){
+        TSexo sexo;
+        if (TSexo.Femenino.toString().equals(pSexo)) {
+            sexo = TSexo.Femenino;
+        }else if (TSexo.Masculino.toString().equals(pSexo)) {
+            sexo = TSexo.Masculino;
+        }else if (TSexo.Otro.toString().equals(pSexo)) {
+            sexo = TSexo.Otro;
+        }else{
+            sexo = TSexo.PrefieroNoEspecificar;
+        }
+        return sexo;
+    }
+    
+    /**
      * Valida que el teléfono tenga 8 dígitos
      * @param pTelefono
      * @return Retornará true si el teléfono es válido, caso contrario retornará false
      */
     public boolean validarTelefono(String pTelefono){
-        if (pTelefono.matches("\\d8")) {
-            return true;
-        }
-        return false;
+        return pTelefono.matches("\\d8");
     }
     
     /**
@@ -74,6 +92,21 @@ public class GestorCliente {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(pCorreo);
         return matcher.matches();
+    }
+    
+    /**
+     * Valida y convierte la fecha de nacimiento a un Date
+     * @param pFechaNacimiento
+     * @return Retorna la fecha de nacimiento si es válida, de lo contrario retornará null
+     */
+    public Date validarFechaNacimiento(String pFechaNacimiento){
+        Date date = null;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            date = formatter.parse(pFechaNacimiento);
+        } catch (ParseException e) {
+        }
+        return date;
     }
     
     /**
@@ -119,6 +152,17 @@ public class GestorCliente {
         return false;
     }
     
+    /**
+     * Modifica al cliente
+     * @param pId
+     * @param pNombre
+     * @param pCorreo
+     * @param pTelefono
+     * @param pDireccion
+     * @param pSexo
+     * @param pFechaNacimiento
+     * @param cliente 
+     */
     public void modificarCliente(String pId, String pNombre, String pCorreo,
         String pTelefono, String pDireccion, TSexo pSexo, Date pFechaNacimiento, Cliente cliente){
 

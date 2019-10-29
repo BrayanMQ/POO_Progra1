@@ -5,16 +5,20 @@
  */
 package vista;
 
+import control.Controlador;
+import java.util.Date;
+import modelo.TSexo;
+
 /**
  *
  * @author dark1
  */
-public class crearUsuario extends javax.swing.JDialog {
+public class crearCliente extends javax.swing.JDialog {
 
     /**
      * Creates new form crearUsuario
      */
-    public crearUsuario(java.awt.Frame parent, boolean modal) {
+    public crearCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -41,7 +45,7 @@ public class crearUsuario extends javax.swing.JDialog {
         txt_correo = new javax.swing.JTextField();
         txt_telefono = new javax.swing.JTextField();
         txt_direccion = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        txt_fechaNacimiento = new javax.swing.JTextField();
         cb_sexo = new javax.swing.JComboBox<>();
         lbl_error = new javax.swing.JLabel();
 
@@ -107,7 +111,7 @@ public class crearUsuario extends javax.swing.JDialog {
                             .addComponent(txt_nombre)
                             .addComponent(txt_correo)
                             .addComponent(txt_identificador)
-                            .addComponent(jTextField7)
+                            .addComponent(txt_fechaNacimiento)
                             .addComponent(txt_direccion)
                             .addComponent(txt_telefono)
                             .addGroup(layout.createSequentialGroup()
@@ -145,7 +149,7 @@ public class crearUsuario extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_fechaNacimiento)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_fechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lbl_error, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -165,7 +169,39 @@ public class crearUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_cb_sexoActionPerformed
 
     private void btn_crearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearClienteActionPerformed
-        // TODO add your handling code here:
+        
+        boolean error = false;
+        String mensajeError = "";
+        lbl_error.setText("");
+        if (!Controlador.getSingletonInstance().getGestorCliente().validarCorreo(txt_correo.getText())) {
+            mensajeError += "El correo no es válido.\n";
+            lbl_error.setText(mensajeError);
+            error = true;
+        }
+        if (!Controlador.getSingletonInstance().validarDigitos(txt_identificador.getText())) {
+            mensajeError += "El identificador debe ser un dígito mayor a 0.\n";
+            lbl_error.setText(mensajeError);
+            error = true;
+        }
+        if (Controlador.getSingletonInstance().getGestorCliente().buscarCliente(mensajeError) >= 0) {
+            mensajeError += "Ya existe un cliente con este id.\n";
+            error = true;
+        }
+        if (!Controlador.getSingletonInstance().getGestorCliente().validarTelefono(txt_telefono.getText())) {
+            mensajeError += "El teléfono debe contener 8 dígitos.\n";
+            error = true;
+        }
+        Date fechaNacimiento = Controlador.getSingletonInstance().getGestorCliente().validarFechaNacimiento(txt_fechaNacimiento.getText());
+        if (fechaNacimiento == null) {
+            mensajeError += "La fecha de nacimiento no es válida.\n";
+            error = true;
+        }
+        
+        
+        if (!error) {
+            Controlador.getSingletonInstance().getGestorCliente().registrarCliente(
+                    txt_identificador.getText(), txt_nombre.getText(), txt_correo.getText(), txt_telefono.getText(), txt_direccion.getText(), (String)cb_sexo.getSelectedItem(), fechaNacimiento);
+        }
     }//GEN-LAST:event_btn_crearClienteActionPerformed
 
     /**
@@ -185,20 +221,21 @@ public class crearUsuario extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(crearUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(crearCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(crearUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(crearCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(crearUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(crearCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(crearUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(crearCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                crearUsuario dialog = new crearUsuario(new javax.swing.JFrame(), true);
+                crearCliente dialog = new crearCliente(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -213,7 +250,6 @@ public class crearUsuario extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_crearCliente;
     private javax.swing.JComboBox<String> cb_sexo;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel lbl_correo;
     private javax.swing.JLabel lbl_direccion;
     private javax.swing.JLabel lbl_error;
@@ -224,6 +260,7 @@ public class crearUsuario extends javax.swing.JDialog {
     private javax.swing.JLabel lbl_telefono;
     private javax.swing.JTextField txt_correo;
     private javax.swing.JTextField txt_direccion;
+    private javax.swing.JTextField txt_fechaNacimiento;
     private javax.swing.JTextField txt_identificador;
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_telefono;
