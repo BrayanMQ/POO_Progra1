@@ -5,6 +5,8 @@
  */
 package control;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import modelo.Counter;
 
 /**
@@ -38,8 +40,12 @@ public class Controlador {
     }
     
     public boolean validarDigitos(String pDigito){
-        if (pDigito.matches("\\d") && Integer.parseInt(pDigito) > 0) {
-            return true;
+        Pattern patronPalabras = Pattern.compile("[0-9]*");
+        Matcher match = patronPalabras.matcher(pDigito);
+        if (match.matches()) {
+            if (Integer.parseInt(pDigito) > 0) {
+                return true;
+            }
         }
         return false;
     }
