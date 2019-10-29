@@ -27,7 +27,7 @@ public class GestorCliente {
      * @return Retorna true si existe un error al crear un cliente, caso contrario retornará false
      */
     public boolean crearCliente(String pId, String pNombre, String pCorreo,
-            String pTelefono, String pDireccion, TSexo pSexo, Date pFechaNacimiento){
+        String pTelefono, String pDireccion, TSexo pSexo, Date pFechaNacimiento){
         
         boolean error = false;
         
@@ -42,16 +42,15 @@ public class GestorCliente {
         }
         
         if (error) {
-            int idCasillero = Controlador.getSingletonInstance().getCounter().getListaCasilleros().size() + CASILLERO_MIL;
             
-            Casillero casillero = new Casillero(idCasillero);
+            Casillero casillero = Controlador.getSingletonInstance().getCounter().getListaCasillerosDisponibles().poll();
+            casillero.setEstado(true); //Casillero ocupado
             
             Cliente cliente =  new Cliente(Integer.parseInt(pId), pNombre, 
                     pCorreo, Integer.parseInt(pTelefono), pDireccion, pSexo, pFechaNacimiento, casillero);
             
+            Controlador.getSingletonInstance().getCounter().getListaCasillerosOcupados().add(casillero);
             Controlador.getSingletonInstance().getCounter().getListaClientes().add(cliente);
-            
-            Controlador.getSingletonInstance().getCounter().getListaCasilleros().add(casillero);
         }
         
         return error;

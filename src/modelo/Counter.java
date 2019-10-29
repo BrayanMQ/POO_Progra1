@@ -6,7 +6,8 @@
 package modelo;
 
 import java.util.ArrayList;
-
+import java.util.LinkedList;
+import java.util.Queue;
 /**
  *
  * @author Ronny
@@ -16,7 +17,8 @@ public class Counter {
     private int cedulaJuridica;
     private String direccion;
     private int cantCasilleros;
-    private ArrayList <Casillero> listaCasilleros;
+    private Queue <Casillero> listaCasillerosDisponibles;
+    private ArrayList<Casillero> listaCasillerosOcupados;
     private ArrayList <Cliente> listaClientes;
 
     public Counter(String nombre, int cedulaJuridica, String direccion, int cantCasilleros) {
@@ -24,7 +26,8 @@ public class Counter {
         this.cedulaJuridica = cedulaJuridica;
         this.direccion = direccion;
         this.cantCasilleros = cantCasilleros;
-        this.listaCasilleros = new ArrayList<>();
+        this.listaCasillerosDisponibles = new LinkedList<>();
+        this.listaCasillerosOcupados = new ArrayList<>();
         this.listaClientes = new ArrayList<>();
     }
 
@@ -44,13 +47,16 @@ public class Counter {
         return cantCasilleros;
     }
 
-    public ArrayList<Casillero> getListaCasilleros() {
-        return listaCasilleros;
+    public Queue<Casillero> getListaCasillerosDisponibles() {
+        return listaCasillerosDisponibles;
     }
 
     public ArrayList<Cliente> getListaClientes() {
         return listaClientes;
     }
-    
+
+    public ArrayList<Casillero> getListaCasillerosOcupados() {
+        return listaCasillerosOcupados;
+    }
     
 }

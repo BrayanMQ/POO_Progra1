@@ -32,6 +32,7 @@ public class Counter extends javax.swing.JFrame {
         lbl_error = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         txt_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +68,8 @@ public class Counter extends javax.swing.JFrame {
                 btn_crearActionPerformed(evt);
             }
         });
+
+        lbl_error.setForeground(new java.awt.Color(255, 0, 51));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

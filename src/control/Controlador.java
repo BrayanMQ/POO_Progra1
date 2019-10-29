@@ -7,13 +7,15 @@ package control;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import modelo.Casillero;
 import modelo.Counter;
+import modelo.IConstants;
 
 /**
  *
  * @author Ronny
  */
-public class Controlador {
+public class Controlador implements IConstants{
     private static Controlador controlador;
     private Counter counter;
     
@@ -36,9 +38,21 @@ public class Controlador {
      * @param pCantidadCasilleros 
      */
     public void crearCounter(String pNombre, String pCedulaJuridica, String direccion, String pCantidadCasilleros){
+        
+        //for que crea la cantidad de casilleros disponibles
+        for (int i = 0; i < Integer.parseInt(pCantidadCasilleros); i++) {
+            Casillero casillero = new Casillero(CASILLERO_MIL+i);
+            Controlador.getSingletonInstance().counter.getListaCasillerosDisponibles().add(casillero);
+        }
+         
         counter = new Counter(pNombre, Integer.parseInt(pCedulaJuridica), direccion, Integer.parseInt(pCantidadCasilleros));
     }
     
+    /**
+     * 
+     * @param pDigito
+     * @return  Retorna true si el string son solo numeros mayores que 0
+     */
     public boolean validarDigitos(String pDigito){
         Pattern patronPalabras = Pattern.compile("[0-9]*");
         Matcher match = patronPalabras.matcher(pDigito);

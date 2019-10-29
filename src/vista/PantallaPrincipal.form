@@ -57,6 +57,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Retiro de art&#xed;culos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItem_retiroArticulosActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

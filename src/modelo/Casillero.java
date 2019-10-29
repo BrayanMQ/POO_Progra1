@@ -22,8 +22,6 @@ public class Casillero {
         this.listaEntregables = new ArrayList<>();
     }
 
-    
-
     public int getId() {
         return id;
     }

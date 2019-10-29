@@ -76,6 +76,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         subMenu_articulos.add(menuItem_recepcionArticulos);
 
         menuItem_retiroArticulos.setText("Retiro de artículos");
+        menuItem_retiroArticulos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItem_retiroArticulosActionPerformed(evt);
+            }
+        });
         subMenu_articulos.add(menuItem_retiroArticulos);
 
         menu_menuPrincipal.add(subMenu_articulos);
@@ -97,20 +102,27 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuItem_modificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_modificarClienteActionPerformed
-        JOptionPane.showMessageDialog(this, null, "Indique el identificador de la persona que desea modificar.", JOptionPane.QUESTION_MESSAGE);
+        String id = JOptionPane.showInputDialog(this, "Indique el identificador de la persona que desea modificar.", "Modificar cliente", JOptionPane.QUESTION_MESSAGE);
     }//GEN-LAST:event_menuItem_modificarClienteActionPerformed
 
     private void menuItem_consultarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_consultarClienteActionPerformed
-        JOptionPane.showMessageDialog(this, null, "Indique el identificador de la persona que desea consultar.", JOptionPane.QUESTION_MESSAGE);
+        String id = JOptionPane.showInputDialog(this, "Indique el identificador de la persona que desea consultar.", "Consultar cliente", JOptionPane.QUESTION_MESSAGE);
     }//GEN-LAST:event_menuItem_consultarClienteActionPerformed
 
     private void menuItem_eliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_eliminarClienteActionPerformed
-        JOptionPane.showMessageDialog(this, null, "Indique el identificador de la persona que desea eliminar.", JOptionPane.QUESTION_MESSAGE);
+        String id = JOptionPane.showInputDialog(this, "Indique el identificador de la persona que desea eliminar.", "Eliminar cliente", JOptionPane.QUESTION_MESSAGE);
     }//GEN-LAST:event_menuItem_eliminarClienteActionPerformed
 
     private void menuItem_recepcionArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_recepcionArticulosActionPerformed
-        Object opcion = JOptionPane.showInputDialog(null,"Selecciona un tipo de paquete", "Elegir tipo de paquete",
-                JOptionPane.QUESTION_MESSAGE,null,IConstants.TIPOS_ENTREGABLE_COMBOBOX, IConstants.TIPOS_ENTREGABLE_COMBOBOX[0]);
+        String casillero = JOptionPane.showInputDialog(this, 
+                "Digite el número de casillero que desea buscar.", 
+                "Registrar artículos", JOptionPane.QUESTION_MESSAGE);
+        
+        Object opcion = JOptionPane.showInputDialog(null,"Selecciona un tipo "
+                + "de paquete", "Elegir tipo de paquete",
+                JOptionPane.QUESTION_MESSAGE,null,
+                IConstants.TIPOS_ENTREGABLE_COMBOBOX, 
+                IConstants.TIPOS_ENTREGABLE_COMBOBOX[0]);
         
         if (opcion.toString().equalsIgnoreCase("Sobre")) {
             new crearSobre(this, rootPaneCheckingEnabled).setVisible(true);
@@ -121,6 +133,16 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_menuItem_recepcionArticulosActionPerformed
+
+    private void menuItem_retiroArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_retiroArticulosActionPerformed
+        String idCasillero = JOptionPane.showInputDialog(this, 
+                "Digite el casillero que desea buscar.", 
+                "Retirar artículos", JOptionPane.QUESTION_MESSAGE);
+        
+        
+        
+        
+    }//GEN-LAST:event_menuItem_retiroArticulosActionPerformed
 
     /**
      * @param args the command line arguments

@@ -62,6 +62,11 @@ public class crearUsuario extends javax.swing.JDialog {
         lbl_fechaNacimiento.setText("Fecha de nacimiento:");
 
         btn_crearCliente.setText("Crear cliente");
+        btn_crearCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_crearClienteActionPerformed(evt);
+            }
+        });
 
         txt_identificador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,6 +163,10 @@ public class crearUsuario extends javax.swing.JDialog {
     private void cb_sexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_sexoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_sexoActionPerformed
+
+    private void btn_crearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_crearClienteActionPerformed
 
     /**
      * @param args the command line arguments
