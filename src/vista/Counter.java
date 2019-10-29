@@ -39,9 +39,11 @@ public class Counter extends javax.swing.JFrame {
             }
         });
 
-        txt_cedulaJuridica.setText(" ");
-
-        txt_direccion.setText(" ");
+        txt_cedulaJuridica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cedulaJuridicaActionPerformed(evt);
+            }
+        });
 
         txt_cantidadCasilleros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,13 +145,16 @@ public class Counter extends javax.swing.JFrame {
     private void btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearActionPerformed
         boolean cedulaJuridicaValida = true;
         boolean cantidadCasillerosValida = true;
-        
-        if (Controlador.getSingletonInstance().validarDigitos(txt_cedulaJuridica.getText())) {
-            lbl_error.setText("La cédula jurídica debe ser un dígito mayor a 0.");
+        String mensajeError = "";
+        lbl_error.setText("");
+        if (!Controlador.getSingletonInstance().validarDigitos(txt_cedulaJuridica.getText())) {
+            mensajeError += "La cédula jurídica debe ser un dígito mayor a 0.\n";
+            lbl_error.setText(mensajeError);
             cedulaJuridicaValida = false;
         }
-        if (Controlador.getSingletonInstance().validarDigitos(txt_cantidadCasilleros.getText())) {
-            lbl_error.setText("La cantidad de casilleros debe ser un dígito mayor a 0.");
+        if (!Controlador.getSingletonInstance().validarDigitos(txt_cantidadCasilleros.getText())) {
+            mensajeError += "La cantidad de casilleros debe ser un dígito mayor a 0.";
+            lbl_error.setText(mensajeError);
             cantidadCasillerosValida = false;
         }
         
@@ -158,6 +163,10 @@ public class Counter extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btn_crearActionPerformed
+
+    private void txt_cedulaJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cedulaJuridicaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_cedulaJuridicaActionPerformed
 
     /**
      * @param args the command line arguments
