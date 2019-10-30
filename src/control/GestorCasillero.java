@@ -25,7 +25,7 @@ public class GestorCasillero {
      */
     public Casillero buscarCasillero(String pId){
         Casillero casillero = null;
-        if (Controlador.getSingletonInstance().validarDigitos(pId)) {
+        if (Controlador.getSingletonInstance().validarDigitosEnteros(pId)) {
             int idCasillero = Integer.parseInt(pId);
                    
             for (Casillero casilleroOcupado : Controlador.getSingletonInstance().getCounter().getListaCasillerosOcupados()) {

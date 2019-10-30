@@ -60,11 +60,11 @@ public class Controlador implements IConstants{
     }
     
     /**
-     * 
+     * Valida numeros enteros
      * @param pDigito
      * @return  Retorna true si el string son solo numeros mayores que 0
      */
-    public boolean validarDigitos(String pDigito){
+    public boolean validarDigitosEnteros(String pDigito){
         Pattern patronPalabras = Pattern.compile("[0-9]*");
         Matcher match = patronPalabras.matcher(pDigito);
         if (match.matches()) {
@@ -73,6 +73,24 @@ public class Controlador implements IConstants{
             }
         }
         return false;
+    }
+    
+    
+    /**
+     * Valida numeros double
+     * @param pDigito
+     * @return Retorna true si el string se puede parsear a double
+     */
+    public boolean validarDigitosDobles(String pDigito){
+        
+        try {
+            double num = Double.parseDouble(pDigito);
+            return true;
+        } catch (Exception e) {
+        }
+        
+        return false;
+
     }
 
     public Counter getCounter() {

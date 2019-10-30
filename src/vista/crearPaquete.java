@@ -6,6 +6,7 @@
 package vista;
 
 import control.Controlador;
+import java.util.ArrayList;
 import modelo.Casillero;
 
 /**
@@ -173,7 +174,22 @@ public class crearPaquete extends javax.swing.JDialog {
     }//GEN-LAST:event_cb_tipoPaqueteActionPerformed
 
     private void btn_crearPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearPaqueteActionPerformed
-
+        boolean error = false;
+        String mensajeError = "";
+        lbl_error.setText("");
+        ArrayList<String> listaDatos = new ArrayList<>();
+        listaDatos.add(txt_id.getText());
+        listaDatos.add(txt_peso.getText());
+        listaDatos.add(txt_descripcion.getText());
+        listaDatos.add(txt_remitente.getText());
+        
+        if (!Controlador.getSingletonInstance().getGestorCliente().validarDatoVacio(listaDatos)) {
+            if (Controlador.getSingletonInstance().validarDigitosEnteros(txt_id.getText())) {
+                
+            }
+            mensajeError = mensajeError  + "No se debe dejar espacios en blanco.\n";
+        }
+            mensajeError = mensajeError  + "No se debe dejar espacios en blanco.\n";
         
     }//GEN-LAST:event_btn_crearPaqueteActionPerformed
 

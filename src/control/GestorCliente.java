@@ -126,7 +126,7 @@ public class GestorCliente {
      */
     public int buscarCliente(String pId){
         int index = -1;
-        if (Controlador.getSingletonInstance().validarDigitos(pId)) {
+        if (Controlador.getSingletonInstance().validarDigitosEnteros(pId)) {
             int id = Integer.parseInt(pId);
             Cliente cliente = new Cliente(id);
             index = Controlador.getSingletonInstance().getCounter().getListaClientes().indexOf(cliente);

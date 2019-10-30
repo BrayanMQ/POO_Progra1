@@ -161,12 +161,12 @@ public class Counter extends javax.swing.JFrame {
             lbl_error.setText(mensajeError);
         }else{
             lbl_error.setText("");
-            if (!Controlador.getSingletonInstance().validarDigitos(txt_cedulaJuridica.getText())) {
+            if (!Controlador.getSingletonInstance().validarDigitosEnteros(txt_cedulaJuridica.getText())) {
                 mensajeError += "La cédula jurídica debe ser un dígito mayor a 0.\n";
                 lbl_error.setText(mensajeError);
                 cedulaJuridicaValida = false;
             }
-            if (!Controlador.getSingletonInstance().validarDigitos(txt_cantidadCasilleros.getText())) {
+            if (!Controlador.getSingletonInstance().validarDigitosEnteros(txt_cantidadCasilleros.getText())) {
                 mensajeError += "La cantidad de casilleros debe ser un dígito mayor a 0.";
                 lbl_error.setText(mensajeError);
                 cantidadCasillerosValida = false;

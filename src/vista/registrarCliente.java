@@ -191,7 +191,7 @@ public class registrarCliente extends javax.swing.JDialog {
             lbl_error.setText(mensajeError);
             error = true;
             }
-            if (!Controlador.getSingletonInstance().validarDigitos(txt_identificador.getText())) {
+            if (!Controlador.getSingletonInstance().validarDigitosEnteros(txt_identificador.getText())) {
                 mensajeError += "El identificador debe ser un dígito mayor a 0.\n";
                 lbl_error.setText(mensajeError);
                 error = true;
