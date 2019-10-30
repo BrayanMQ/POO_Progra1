@@ -6,6 +6,7 @@
 package vista;
 
 import control.Controlador;
+import java.util.ArrayList;
 import java.util.Date;
 import modelo.TSexo;
 
@@ -173,34 +174,50 @@ public class crearCliente extends javax.swing.JDialog {
         boolean error = false;
         String mensajeError = "";
         lbl_error.setText("");
-        if (!Controlador.getSingletonInstance().getGestorCliente().validarCorreo(txt_correo.getText())) {
+        ArrayList<String> listaDatos = new ArrayList<>();
+        listaDatos.add(txt_correo.getText());
+        listaDatos.add(txt_direccion.getText());
+        listaDatos.add(txt_fechaNacimiento.getText());
+        listaDatos.add(txt_identificador.getText());
+        listaDatos.add(txt_nombre.getText());
+        listaDatos.add(txt_telefono.getText());
+        listaDatos.add((String)cb_sexo.getSelectedItem());
+        if (!Controlador.getSingletonInstance().getGestorCliente().validarDatoVacio(listaDatos)) {
+            mensajeError += "No se debe dejar espacios en blanco.\n";
+            lbl_error.setText(mensajeError);
+        }else{
+            if (!Controlador.getSingletonInstance().getGestorCliente().validarCorreo(txt_correo.getText())) {
             mensajeError += "El correo no es válido.\n";
             lbl_error.setText(mensajeError);
             error = true;
-        }
-        if (!Controlador.getSingletonInstance().validarDigitos(txt_identificador.getText())) {
-            mensajeError += "El identificador debe ser un dígito mayor a 0.\n";
-            lbl_error.setText(mensajeError);
-            error = true;
-        }
-        if (Controlador.getSingletonInstance().getGestorCliente().buscarCliente(mensajeError) >= 0) {
-            mensajeError += "Ya existe un cliente con este id.\n";
-            error = true;
-        }
-        if (!Controlador.getSingletonInstance().getGestorCliente().validarTelefono(txt_telefono.getText())) {
-            mensajeError += "El teléfono debe contener 8 dígitos.\n";
-            error = true;
-        }
-        Date fechaNacimiento = Controlador.getSingletonInstance().getGestorCliente().validarFechaNacimiento(txt_fechaNacimiento.getText());
-        if (fechaNacimiento == null) {
-            mensajeError += "La fecha de nacimiento no es válida.\n";
-            error = true;
-        }
-        
-        
-        if (!error) {
-            Controlador.getSingletonInstance().getGestorCliente().registrarCliente(
-                    txt_identificador.getText(), txt_nombre.getText(), txt_correo.getText(), txt_telefono.getText(), txt_direccion.getText(), (String)cb_sexo.getSelectedItem(), fechaNacimiento);
+            }
+            if (!Controlador.getSingletonInstance().validarDigitos(txt_identificador.getText())) {
+                mensajeError += "El identificador debe ser un dígito mayor a 0.\n";
+                lbl_error.setText(mensajeError);
+                error = true;
+            }
+            if (Controlador.getSingletonInstance().getGestorCliente().buscarCliente(mensajeError) >= 0) {
+                mensajeError += "Ya existe un cliente con este id.\n";
+                lbl_error.setText(mensajeError);
+                error = true;
+            }
+            if (!Controlador.getSingletonInstance().getGestorCliente().validarTelefono(txt_telefono.getText())) {
+                mensajeError += "El teléfono debe contener 8 dígitos.\n";
+                lbl_error.setText(mensajeError);
+                error = true;
+            }
+            Date fechaNacimiento = Controlador.getSingletonInstance().getGestorCliente().validarFechaNacimiento(txt_fechaNacimiento.getText());
+            if (fechaNacimiento == null) {
+                mensajeError += "La fecha de nacimiento no es válida.\n";
+                lbl_error.setText(mensajeError);
+                error = true;
+            }
+
+
+            if (!error) {
+                Controlador.getSingletonInstance().getGestorCliente().registrarCliente(
+                        txt_identificador.getText(), txt_nombre.getText(), txt_correo.getText(), txt_telefono.getText(), txt_direccion.getText(), (String)cb_sexo.getSelectedItem(), fechaNacimiento);
+            }
         }
     }//GEN-LAST:event_btn_crearClienteActionPerformed
 

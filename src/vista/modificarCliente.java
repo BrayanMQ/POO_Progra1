@@ -5,7 +5,11 @@
  */
 package vista;
 
+import control.Controlador;
+import java.util.ArrayList;
+import java.util.Date;
 import modelo.Cliente;
+import modelo.TSexo;
 
 /**
  *
@@ -24,6 +28,7 @@ public class modificarCliente extends javax.swing.JDialog {
         txt_telefono.setText((String.valueOf(cliente.getTelefono())));
         txt_correo.setText(cliente.getCorreo());
         txt_direccion.setText(cliente.getDireccion());
+        txt_fechaNacimiento.setText(cliente.getFechaNacimiento().toString());
         initComponents();
     }
 
@@ -42,14 +47,14 @@ public class modificarCliente extends javax.swing.JDialog {
         lbl_nombre = new javax.swing.JLabel();
         txt_direccion = new javax.swing.JTextField();
         lbl_correo = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txt_fechaNacimiento = new javax.swing.JTextField();
         lbl_telefono = new javax.swing.JLabel();
         cb_sexo = new javax.swing.JComboBox<>();
         lbl_direccion = new javax.swing.JLabel();
         lbl_error = new javax.swing.JLabel();
         lbl_sexo = new javax.swing.JLabel();
         lbl_fechaNacimiento = new javax.swing.JLabel();
-        btn_crearCliente = new javax.swing.JButton();
+        btn_modificarCliente = new javax.swing.JButton();
         txt_identificador = new javax.swing.JTextField();
         txt_nombre = new javax.swing.JTextField();
 
@@ -76,7 +81,12 @@ public class modificarCliente extends javax.swing.JDialog {
 
         lbl_fechaNacimiento.setText("Fecha de nacimiento:");
 
-        btn_crearCliente.setText("Crear cliente");
+        btn_modificarCliente.setText("Modificar cliente");
+        btn_modificarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_modificarClienteActionPerformed(evt);
+            }
+        });
 
         txt_identificador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +100,7 @@ public class modificarCliente extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(100, 100, 100)
-                .addComponent(btn_crearCliente)
+                .addComponent(btn_modificarCliente)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -110,7 +120,7 @@ public class modificarCliente extends javax.swing.JDialog {
                             .addComponent(txt_nombre)
                             .addComponent(txt_correo)
                             .addComponent(txt_identificador)
-                            .addComponent(jTextField7)
+                            .addComponent(txt_fechaNacimiento)
                             .addComponent(txt_direccion)
                             .addComponent(txt_telefono)
                             .addGroup(layout.createSequentialGroup()
@@ -148,11 +158,11 @@ public class modificarCliente extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_fechaNacimiento)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_fechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lbl_error, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_crearCliente)
+                .addComponent(btn_modificarCliente)
                 .addContainerGap())
         );
 
@@ -166,6 +176,55 @@ public class modificarCliente extends javax.swing.JDialog {
     private void txt_identificadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_identificadorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_identificadorActionPerformed
+
+    private void btn_modificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarClienteActionPerformed
+
+        boolean error = false;
+        String mensajeError = "";
+        lbl_error.setText("");
+        ArrayList<String> listaDatos = new ArrayList<>();
+        listaDatos.add(txt_correo.getText());
+        listaDatos.add(txt_direccion.getText());
+        listaDatos.add(txt_fechaNacimiento.getText());
+        listaDatos.add(txt_identificador.getText());
+        listaDatos.add(txt_nombre.getText());
+        listaDatos.add(txt_telefono.getText());
+        listaDatos.add((String)cb_sexo.getSelectedItem());
+        
+        if (!Controlador.getSingletonInstance().getGestorCliente().validarDatoVacio(listaDatos)) {
+            mensajeError += "No se debe dejar espacios en blanco.\n";
+            lbl_error.setText(mensajeError);
+        }else{
+        
+            if (!Controlador.getSingletonInstance().validarDigitos(txt_identificador.getText())) {
+                mensajeError += "El identificador debe ser un dígito mayor a 0.\n";
+                lbl_error.setText(mensajeError);
+                error = true;
+            }
+            if (!Controlador.getSingletonInstance().getGestorCliente().validarTelefono(txt_telefono.getText())) {
+                mensajeError += "El teléfono debe contener 8 dígitos.\n";
+                error = true;
+            }
+            if (!Controlador.getSingletonInstance().getGestorCliente().validarCorreo(txt_correo.getText())) {
+                mensajeError += "El correo no es válido.\n";
+                lbl_error.setText(mensajeError);
+                error = true;
+            }
+            Date fechaNacimiento = Controlador.getSingletonInstance().getGestorCliente().validarFechaNacimiento(txt_fechaNacimiento.getText());
+            if (fechaNacimiento == null) {
+                mensajeError += "La fecha de nacimiento no es válida.\n";
+                error = true;
+            }
+
+
+            if (!error) {
+                Controlador.getSingletonInstance().getGestorCliente().modificarCliente(
+                        txt_identificador.getText(), txt_nombre.getText(), txt_correo.getText(),
+            txt_telefono.getText(), txt_direccion.getText(), (String)cb_sexo.getSelectedItem(), fechaNacimiento, cliente);
+
+            }
+        }
+    }//GEN-LAST:event_btn_modificarClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,9 +269,8 @@ public class modificarCliente extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_crearCliente;
+    private javax.swing.JButton btn_modificarCliente;
     private javax.swing.JComboBox<String> cb_sexo;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel lbl_correo;
     private javax.swing.JLabel lbl_direccion;
     private javax.swing.JLabel lbl_error;
@@ -223,6 +281,7 @@ public class modificarCliente extends javax.swing.JDialog {
     private javax.swing.JLabel lbl_telefono;
     private javax.swing.JTextField txt_correo;
     private javax.swing.JTextField txt_direccion;
+    private javax.swing.JTextField txt_fechaNacimiento;
     private javax.swing.JTextField txt_identificador;
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_telefono;

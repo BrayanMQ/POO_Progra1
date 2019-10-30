@@ -3,6 +3,7 @@ package control;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -109,6 +110,15 @@ public class GestorCliente {
         return date;
     }
     
+    public boolean validarDatoVacio(ArrayList<String> pListaDatos){
+        for (String dato : pListaDatos) {
+            if ("".equals(dato)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     /**
      * Busca el cliente en la lista de clientes del counter
      * @param pId
@@ -162,14 +172,14 @@ public class GestorCliente {
      * @param cliente 
      */
     public void modificarCliente(String pId, String pNombre, String pCorreo,
-        String pTelefono, String pDireccion, TSexo pSexo, Date pFechaNacimiento, Cliente cliente){
+        String pTelefono, String pDireccion, String pSexo, Date pFechaNacimiento, Cliente cliente){
 
         cliente.setId(Integer.parseInt(pId));
         cliente.setNombre(pNombre);
         cliente.setCorreo(pCorreo);
         cliente.setTelefono(Integer.parseInt(pTelefono));
         cliente.setDireccion(pDireccion);
-        cliente.setSexo(pSexo);
+        cliente.setSexo(convertirTSexo(pSexo));
         cliente.setFechaNacimiento(pFechaNacimiento);
         
     }

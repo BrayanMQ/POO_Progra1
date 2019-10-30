@@ -2,6 +2,7 @@
 package vista;
 
 import control.Controlador;
+import java.util.ArrayList;
 
 public class Counter extends javax.swing.JFrame {
 
@@ -149,22 +150,32 @@ public class Counter extends javax.swing.JFrame {
         boolean cedulaJuridicaValida = true;
         boolean cantidadCasillerosValida = true;
         String mensajeError = "";
-        lbl_error.setText("");
-        if (!Controlador.getSingletonInstance().validarDigitos(txt_cedulaJuridica.getText())) {
-            mensajeError += "La cédula jurídica debe ser un dígito mayor a 0.\n";
-            lbl_error.setText(mensajeError);
-            cedulaJuridicaValida = false;
-        }
-        if (!Controlador.getSingletonInstance().validarDigitos(txt_cantidadCasilleros.getText())) {
-            mensajeError += "La cantidad de casilleros debe ser un dígito mayor a 0.";
-            lbl_error.setText(mensajeError);
-            cantidadCasillerosValida = false;
-        }
+        ArrayList<String> listaDatos = new ArrayList<>();
+        listaDatos.add(txt_cantidadCasilleros.getText());
+        listaDatos.add(txt_cedulaJuridica.getText());
+        listaDatos.add(txt_direccion.getText());
+        listaDatos.add(txt_nombre.getText());
         
-        if (cedulaJuridicaValida && cantidadCasillerosValida) {
-            Controlador.getSingletonInstance().crearCounter(txt_nombre.getText(), txt_cedulaJuridica.getText(), txt_direccion.getText(), txt_cantidadCasilleros.getText());
+        if (!Controlador.getSingletonInstance().getGestorCliente().validarDatoVacio(listaDatos)) {
+            mensajeError += "No se debe dejar espacios en blanco.\n";
+            lbl_error.setText(mensajeError);
+        }else{
+            lbl_error.setText("");
+            if (!Controlador.getSingletonInstance().validarDigitos(txt_cedulaJuridica.getText())) {
+                mensajeError += "La cédula jurídica debe ser un dígito mayor a 0.\n";
+                lbl_error.setText(mensajeError);
+                cedulaJuridicaValida = false;
+            }
+            if (!Controlador.getSingletonInstance().validarDigitos(txt_cantidadCasilleros.getText())) {
+                mensajeError += "La cantidad de casilleros debe ser un dígito mayor a 0.";
+                lbl_error.setText(mensajeError);
+                cantidadCasillerosValida = false;
+            }
+
+            if (cedulaJuridicaValida && cantidadCasillerosValida) {
+                Controlador.getSingletonInstance().crearCounter(txt_nombre.getText(), txt_cedulaJuridica.getText(), txt_direccion.getText(), txt_cantidadCasilleros.getText());
+            }
         }
-        
     }//GEN-LAST:event_btn_crearActionPerformed
 
     private void txt_cedulaJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cedulaJuridicaActionPerformed
