@@ -3,6 +3,7 @@ package vista;
 
 import control.Controlador;
 import javax.swing.JOptionPane;
+import modelo.Casillero;
 import modelo.Cliente;
 import modelo.IConstants;
 import modelo.TSexo;
@@ -113,15 +114,17 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void menuItem_modificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_modificarClienteActionPerformed
         String id = JOptionPane.showInputDialog(this, "Indique el identificador de la persona que desea modificar.", "Modificar cliente", JOptionPane.QUESTION_MESSAGE);
         
-        int index = Controlador.getSingletonInstance().getGestorCliente().buscarCliente(id);
+        if (id != null ) {//Si no le da al botón cancelar
+             int index = Controlador.getSingletonInstance().getGestorCliente().buscarCliente(id);
         
-        if (index >= 0) {
-            Cliente cliente = Controlador.getSingletonInstance().getGestorCliente().consultarDatosCliente(index);
-            new modificarCliente(this, rootPaneCheckingEnabled, cliente).setVisible(true);
-        } else {
-        
-        JOptionPane.showMessageDialog(this, "No se ha encontrado el cliente con id " + id + ".", "Modificar cliente", JOptionPane.INFORMATION_MESSAGE);
-        
+            if (index >= 0) {
+                Cliente cliente = Controlador.getSingletonInstance().getGestorCliente().consultarDatosCliente(index);
+                new modificarCliente(this, rootPaneCheckingEnabled, cliente).setVisible(true);
+            } else {
+
+            JOptionPane.showMessageDialog(this, "No se ha encontrado el cliente con id " + id + ".", "Modificar cliente", JOptionPane.INFORMATION_MESSAGE);
+
+            }
         }
         
     }//GEN-LAST:event_menuItem_modificarClienteActionPerformed
@@ -129,20 +132,24 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void menuItem_consultarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_consultarClienteActionPerformed
         String id = JOptionPane.showInputDialog(this, "Indique el identificador de la persona que desea consultar.", "Consultar cliente", JOptionPane.QUESTION_MESSAGE);
         
-        int index = Controlador.getSingletonInstance().getGestorCliente().buscarCliente(id);
-        
-        if (index >= 0) {
-            Cliente cliente = Controlador.getSingletonInstance().getGestorCliente().consultarDatosCliente(index);
-            JOptionPane.showMessageDialog(this, "Identificador: " + cliente.getId()+ "\n" + 
-                    "Nombre: " + cliente.getNombre() + "\n" + 
-                    "Correo: " + cliente.getCorreo()+ "\n" + 
-                    "Teléfono: " + cliente.getTelefono() + "\n" +
-                    "Dirección: " + cliente.getDireccion()+ "\n" +
-                    "Sexo: " + cliente.getSexo().toString()+ "\n" +
-                    "Fecha de nacimiento: " + cliente.getFechaNacimiento(), "Consultar cliente", JOptionPane.QUESTION_MESSAGE);
-        } else {
-        
-        JOptionPane.showMessageDialog(this, "No se ha encontrado el cliente con id " + id + ".", "Consultar cliente", JOptionPane.INFORMATION_MESSAGE);
+        if (id != null ) {//Si no le da al botón cancelar
+            
+            int index = Controlador.getSingletonInstance().getGestorCliente().buscarCliente(id);
+
+            if (index >= 0) {
+                Cliente cliente = Controlador.getSingletonInstance().getGestorCliente().consultarDatosCliente(index);
+                JOptionPane.showMessageDialog(this, "Identificador: " + cliente.getId()+ "\n" + 
+                        "Nombre: " + cliente.getNombre() + "\n" + 
+                        "Correo: " + cliente.getCorreo()+ "\n" + 
+                        "Teléfono: " + cliente.getTelefono() + "\n" +
+                        "Dirección: " + cliente.getDireccion()+ "\n" +
+                        "Sexo: " + cliente.getSexo().toString()+ "\n" +
+                        "Fecha de nacimiento: " + cliente.getFechaNacimiento(), "Consultar cliente", JOptionPane.QUESTION_MESSAGE);
+            } else {
+
+            JOptionPane.showMessageDialog(this, "No se ha encontrado el cliente con id " + id + ".", "Consultar cliente", JOptionPane.INFORMATION_MESSAGE);
+
+            }
         
         }
         
@@ -151,47 +158,58 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void menuItem_eliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_eliminarClienteActionPerformed
         String id = JOptionPane.showInputDialog(this, "Indique el identificador de la persona que desea eliminar.", "Eliminar cliente", JOptionPane.QUESTION_MESSAGE);
         
-        int index = Controlador.getSingletonInstance().getGestorCliente().buscarCliente(id);
-        
-        if (index >= 0) {
-            Controlador.getSingletonInstance().getGestorCliente().eliminarCliente(id);
+        if (id != null ) {//Si no le da al botón cancelar
+
+            int index = Controlador.getSingletonInstance().getGestorCliente().buscarCliente(id);
+
+            if (index >= 0) {
+                Controlador.getSingletonInstance().getGestorCliente().eliminarCliente(id);
+
+            } else {
+                JOptionPane.showMessageDialog(this, "No se ha encontrado el cliente con id " + id + ".", "Eliminar cliente", JOptionPane.INFORMATION_MESSAGE);
+            }
             
-        } else {
-            JOptionPane.showMessageDialog(this, "No se ha encontrado el cliente con id " + id + ".", "Eliminar cliente", JOptionPane.INFORMATION_MESSAGE);
         }
+
         
     }//GEN-LAST:event_menuItem_eliminarClienteActionPerformed
 
     private void menuItem_recepcionArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_recepcionArticulosActionPerformed
-        String casillero = JOptionPane.showInputDialog(this, 
+        String idDasillero = JOptionPane.showInputDialog(this, 
                 "Digite el número de casillero que desea buscar.", 
                 "Registrar artículos", JOptionPane.QUESTION_MESSAGE);
-        
-        
-        Object opcion = JOptionPane.showInputDialog(null,"Selecciona un tipo "
+
+        if (idDasillero != null) {//Si no le da al botón cancelar
+            
+            //Obtenermos el casillero
+            Casillero casillero  = Controlador.getSingletonInstance().getGestorCasillero().buscarCasillero(idDasillero);
+            
+            if (casillero != null) { //Si el casillero no es nulo
+                Object opcion = JOptionPane.showInputDialog(null,"Selecciona un tipo "
                 + "de paquete", "Elegir tipo de paquete",
                 JOptionPane.QUESTION_MESSAGE,null,
                 IConstants.TIPOS_ENTREGABLE_COMBOBOX, 
                 IConstants.TIPOS_ENTREGABLE_COMBOBOX[0]);
-        
-        if (opcion.toString().equalsIgnoreCase("Sobre")) {
-            new crearSobre(this, rootPaneCheckingEnabled).setVisible(true);
-        } else if (opcion.toString().equalsIgnoreCase("Paquete")) {
-            new crearPaquete(this, rootPaneCheckingEnabled).setVisible(true);
-        } else if (opcion.toString().equalsIgnoreCase("Revista")) {
-            new crearRevista(this, rootPaneCheckingEnabled).setVisible(true);
+            
+                if (opcion != null) { //Si no le da al botón cancelar
+
+                    if (opcion.toString().equalsIgnoreCase("Sobre")) {
+                        new crearSobre(this, rootPaneCheckingEnabled, casillero).setVisible(true);
+                    } else if (opcion.toString().equalsIgnoreCase("Paquete")) {
+                        new crearPaquete(this, rootPaneCheckingEnabled, casillero).setVisible(true);
+                    } else if (opcion.toString().equalsIgnoreCase("Revista")) {
+                        new crearRevista(this, rootPaneCheckingEnabled, casillero).setVisible(true);
+                    } 
+                }
+            }
         }
-        
     }//GEN-LAST:event_menuItem_recepcionArticulosActionPerformed
 
     private void menuItem_retiroArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_retiroArticulosActionPerformed
         String idCasillero = JOptionPane.showInputDialog(this, 
                 "Digite el casillero que desea buscar.", 
                 "Retirar artículos", JOptionPane.QUESTION_MESSAGE);
-        
-        
-        
-        
+
     }//GEN-LAST:event_menuItem_retiroArticulosActionPerformed
 
     private void menuItem_registrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_registrarClienteActionPerformed

@@ -1,10 +1,13 @@
 
 package vista;
 
-public class crearSobre extends javax.swing.JDialog {
+import modelo.Casillero;
 
-    public crearSobre(java.awt.Frame parent, boolean modal) {
+public class crearSobre extends javax.swing.JDialog {
+    private static Casillero casillero;
+    public crearSobre(java.awt.Frame parent, boolean modal, Casillero casillero) {
         super(parent, modal);
+        this.casillero = casillero;
         initComponents();
     }
 
@@ -49,6 +52,11 @@ public class crearSobre extends javax.swing.JDialog {
         lbl_remitente.setText("Remitente:");
 
         btn_crearPaquete.setText("Crear paquete");
+        btn_crearPaquete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_crearPaqueteActionPerformed(evt);
+            }
+        });
 
         lbl_tipoSobre.setText("Tipo de sobre:");
 
@@ -132,6 +140,12 @@ public class crearSobre extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_descripcionActionPerformed
 
+    private void btn_crearPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearPaqueteActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_btn_crearPaqueteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -163,7 +177,7 @@ public class crearSobre extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                crearSobre dialog = new crearSobre(new javax.swing.JFrame(), true);
+                crearSobre dialog = new crearSobre(new javax.swing.JFrame(), true, casillero);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

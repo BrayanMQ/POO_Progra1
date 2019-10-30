@@ -19,6 +19,7 @@ public class Controlador implements IConstants{
     private static Controlador controlador;
     private Counter counter;
     private GestorCliente gestorCliente;
+    private GestorCasillero gestorCasillero;
 
     public Controlador() {
         this.gestorCliente = new GestorCliente();
@@ -76,4 +77,10 @@ public class Controlador implements IConstants{
     public Counter getCounter() {
         return counter;
     }
+
+    public GestorCasillero getGestorCasillero() {
+        return gestorCasillero;
+    }
+    
+    
 }

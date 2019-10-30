@@ -144,9 +144,7 @@ public class GestorCliente {
         if (index >= 0) {
             Cliente cliente = Controlador.getSingletonInstance().getCounter().getListaClientes().remove(index);
             Casillero casillero = cliente.getCasillero();
-            casillero.limpiarCasillero();
-            Controlador.getSingletonInstance().getCounter().getListaCasillerosOcupados().remove(casillero);
-            Controlador.getSingletonInstance().getCounter().getListaCasillerosDisponibles().add(casillero);
+            
             return true;
         } 
         return false;

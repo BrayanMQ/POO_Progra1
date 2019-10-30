@@ -5,17 +5,20 @@
  */
 package vista;
 
+import modelo.Casillero;
+
 /**
  *
  * @author dark1
  */
 public class crearRevista extends javax.swing.JDialog {
-
+    private static Casillero casillero;
     /**
      * Creates new form crearPaquete
      */
-    public crearRevista(java.awt.Frame parent, boolean modal) {
+    public crearRevista(java.awt.Frame parent, boolean modal, Casillero casillero) {
         super(parent, modal);
+        this.casillero = casillero;
         initComponents();
     }
 
@@ -174,7 +177,7 @@ public class crearRevista extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                crearRevista dialog = new crearRevista(new javax.swing.JFrame(), true);
+                crearRevista dialog = new crearRevista(new javax.swing.JFrame(), true, casillero);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
