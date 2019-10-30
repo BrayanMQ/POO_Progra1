@@ -11,12 +11,17 @@ package modelo;
  */
 public class Entregable {
     protected int id;
-    protected double preso;
+    protected double peso;
     protected boolean estado;
     protected String descripcion;
     protected String remitente;
 
-    public Entregable() {
+    public Entregable(int id, double peso, String descripcion, String remitente) {
+        this.id = id;
+        this.peso = peso;
+        this.estado = false;
+        this.descripcion = descripcion;
+        this.remitente = remitente;
     }
 
     public int getId() {
@@ -28,11 +33,11 @@ public class Entregable {
     }
 
     public double getPreso() {
-        return preso;
+        return peso;
     }
 
-    public void setPreso(double preso) {
-        this.preso = preso;
+    public void setPeso(double peso) {
+        this.peso = peso;
     }
 
     public boolean isEstado() {
