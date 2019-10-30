@@ -213,7 +213,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItem_retiroArticulosActionPerformed
 
     private void menuItem_registrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_registrarClienteActionPerformed
-        new crearCliente(this, rootPaneCheckingEnabled).setVisible(true);
+        new registrarCliente(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_menuItem_registrarClienteActionPerformed
 
     /**
