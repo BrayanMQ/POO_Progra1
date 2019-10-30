@@ -5,6 +5,7 @@
  */
 package vista;
 
+import control.Controlador;
 import modelo.Casillero;
 
 /**
@@ -65,6 +66,11 @@ public class crearPaquete extends javax.swing.JDialog {
         lbl_remitente.setText("Remitente:");
 
         btn_crearPaquete.setText("Crear paquete");
+        btn_crearPaquete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_crearPaqueteActionPerformed(evt);
+            }
+        });
 
         lbl_tipoPaquete.setText("Tipo de paquete:");
 
@@ -141,11 +147,11 @@ public class crearPaquete extends javax.swing.JDialog {
                     .addComponent(lbl_tipoPaquete)
                     .addComponent(cb_tipoPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(checkB_fragil)
                     .addComponent(lbl_fragil))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(checkB_contElectronico)
                     .addComponent(lbl_contElectronico))
                 .addGap(18, 18, 18)
@@ -165,6 +171,11 @@ public class crearPaquete extends javax.swing.JDialog {
     private void cb_tipoPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipoPaqueteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_tipoPaqueteActionPerformed
+
+    private void btn_crearPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearPaqueteActionPerformed
+
+        
+    }//GEN-LAST:event_btn_crearPaqueteActionPerformed
 
     /**
      * @param args the command line arguments
