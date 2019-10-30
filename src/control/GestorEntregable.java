@@ -4,6 +4,7 @@ package control;
 import modelo.Casillero;
 import modelo.Entregable;
 import modelo.Paquete;
+import modelo.Revista;
 import modelo.TPaquete;
 
 public class GestorEntregable {
@@ -31,8 +32,12 @@ public class GestorEntregable {
     
     }
     
-    public void crearRevista(){
-    
+    public Revista crearRevista(boolean pEsCatalogo, String pTema, String pId, String pPeso, String pDescripcion, String pRemitente){
+        if (pEsCatalogo) {
+            
+        }
+        Revista revista = new Revista(pEsCatalogo, pTema, Integer.parseInt(pId), Double.parseDouble(pPeso), pDescripcion, pRemitente);
+        return revista;
     }
     
     public boolean buscarEntregableEInsertar(Entregable pEntregable, Casillero casillero){

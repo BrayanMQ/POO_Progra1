@@ -5,7 +5,11 @@
  */
 package vista;
 
+import control.Controlador;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import modelo.Casillero;
+import modelo.Revista;
 
 /**
  *
@@ -63,6 +67,11 @@ public class crearRevista extends javax.swing.JDialog {
         lbl_remitente.setText("Remitente:");
 
         btn_crearRevista.setText("Crear revista");
+        btn_crearRevista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_crearRevistaActionPerformed(evt);
+            }
+        });
 
         lbl_tipoRevista.setText("Tema de la revista:");
 
@@ -145,6 +154,50 @@ public class crearRevista extends javax.swing.JDialog {
     private void txt_descripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_descripcionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_descripcionActionPerformed
+
+    private void btn_crearRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearRevistaActionPerformed
+        boolean error = false;
+        String mensajeError = "";
+        lbl_error.setText("");
+        ArrayList<String> listaDatos = new ArrayList<>();
+        listaDatos.add(txt_descripcion.getText());
+        listaDatos.add(txt_id.getText());
+        listaDatos.add(txt_peso.getText());
+        listaDatos.add(txt_remitente.getText());
+        listaDatos.add(txt_tema.getText());
+        
+        if (!Controlador.getSingletonInstance().getGestorCliente().validarDatoVacio(listaDatos)) {
+            mensajeError += "No se debe dejar espacios en blanco.\n";
+            lbl_error.setText(mensajeError);
+        }else{
+            if (!Controlador.getSingletonInstance().validarDigitosEnteros(txt_id.getText())) {
+                mensajeError += "El identificador debe ser un dígito mayor a 0.\n";
+                lbl_error.setText(mensajeError);
+                error = true;
+            }
+            if (!Controlador.getSingletonInstance().validarDigitosDobles(txt_peso.getText())) {
+                mensajeError += "El peso debe ser un dígito mayor a 0.0.\n";
+                lbl_error.setText(mensajeError);
+                error = true;
+            }
+            
+            if (!error) {
+                Revista revista = Controlador.getSingletonInstance().getGestorEntregable().crearRevista(
+                        checkB_esCatalogo.isSelected(), txt_tema.getText(), txt_id.getText(),
+                        txt_peso.getText(), txt_descripcion.getText(), txt_remitente.getText());
+                
+                boolean insertado = Controlador.getSingletonInstance()
+                            .getGestorEntregable().buscarEntregableEInsertar(revista, casillero);
+                
+                if (!insertado) { //Si no lo insertó
+                        lbl_error.setText("Ya existe un entregable con el mismo id.");
+                }else{
+                    JOptionPane.showMessageDialog(this, "Se registró la revista con éxito", "Paquete registrado", JOptionPane.INFORMATION_MESSAGE);
+                }
+                        
+            }
+        }
+    }//GEN-LAST:event_btn_crearRevistaActionPerformed
 
     /**
      * @param args the command line arguments
