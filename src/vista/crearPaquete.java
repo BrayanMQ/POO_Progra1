@@ -205,7 +205,7 @@ public class crearPaquete extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, "Se registró el paquete con éxito", "Paquete registrado", JOptionPane.INFORMATION_MESSAGE);
                     
                 }
-                 mensajeError = mensajeError  + "El peso debe ser .\n";
+                 mensajeError = mensajeError  + "El peso debe ser un número.\n";
             }
             mensajeError = mensajeError  + "El id debe ser un número entero.\n";
         }

@@ -1,7 +1,11 @@
 
 package vista;
 
+import control.Controlador;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import modelo.Casillero;
+import modelo.Sobre;
 
 public class crearSobre extends javax.swing.JDialog {
     private static Casillero casillero;
@@ -141,7 +145,33 @@ public class crearSobre extends javax.swing.JDialog {
     }//GEN-LAST:event_txt_descripcionActionPerformed
 
     private void btn_crearPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearPaqueteActionPerformed
+        boolean error = false;
+        String mensajeError = "";
+        lbl_error.setText("");
+        ArrayList<String> listaDatos = new ArrayList<>();
+        listaDatos.add(txt_id.getText());
+        listaDatos.add(txt_peso.getText());
+        listaDatos.add(txt_descripcion.getText());
+        listaDatos.add(txt_remitente.getText());
         
+        if(!Controlador.getSingletonInstance().getGestorCliente().validarDatoVacio(listaDatos)){
+            if (Controlador.getSingletonInstance().validarDigitosEnteros(txt_id.getText())){
+                if (Controlador.getSingletonInstance().validarDigitosDobles(txt_peso.getText())){
+                    Sobre sobre = Controlador.getSingletonInstance().getGestorEntregable().crearSobre(Integer.parseInt(txt_id.getText()), 
+                            Double.parseDouble(txt_peso.getText()), 
+                            txt_descripcion.getText(), txt_remitente.getText(),(String)cb_tipoSobre.getSelectedItem(),checkB_tieneDocumentos.isSelected());
+                    boolean insertado = Controlador.getSingletonInstance().getGestorEntregable().buscarEntregableEInsertar(sobre, casillero);
+                    if (!insertado) { //Si no lo insertó
+                        lbl_error.setText("Ya existe un sobre con el mismo id.");
+                    }
+                    
+                    JOptionPane.showMessageDialog(this, "Se registró el sobre con éxito", "Sobre registrado", JOptionPane.INFORMATION_MESSAGE);
+                }
+                mensajeError = mensajeError  + "El peso debe ser un número.\n";     
+            }
+            mensajeError = mensajeError  + "El id debe ser un número entero.\n";
+        }
+            mensajeError = mensajeError + "No se pueden dejar espacios en blanco.\n";    
         
         
     }//GEN-LAST:event_btn_crearPaqueteActionPerformed
