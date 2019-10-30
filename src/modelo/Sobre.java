@@ -13,7 +13,10 @@ public class Sobre extends Entregable{
     private TSobre tipo;
     private boolean tieneDocumnetos;
 
-    public Sobre() {
+    public Sobre(TSobre tipo, boolean tieneDocumnetos, int id, double peso, String descripcion, String remitente) {
+        super(id, peso, descripcion, remitente);
+        this.tipo = tipo;
+        this.tieneDocumnetos = tieneDocumnetos;
     }
 
     public TSobre getTipo() {

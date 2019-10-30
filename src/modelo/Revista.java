@@ -13,7 +13,10 @@ public class Revista extends Entregable{
     private boolean esCatalogo;
     private String tema;
 
-    public Revista() {
+    public Revista(boolean esCatalogo, String tema, int id, double peso, String descripcion, String remitente) {
+        super(id, peso, descripcion, remitente);
+        this.esCatalogo = esCatalogo;
+        this.tema = tema;
     }
 
     public boolean isEsCatalogo() {

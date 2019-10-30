@@ -7,7 +7,9 @@ package vista;
 
 import control.Controlador;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import modelo.Casillero;
+import modelo.Paquete;
 
 /**
  *
@@ -185,11 +187,31 @@ public class crearPaquete extends javax.swing.JDialog {
         
         if (!Controlador.getSingletonInstance().getGestorCliente().validarDatoVacio(listaDatos)) {
             if (Controlador.getSingletonInstance().validarDigitosEnteros(txt_id.getText())) {
-                
+                if (Controlador.getSingletonInstance().validarDigitosDobles(txt_peso.getText())) {
+                    
+                    Paquete paquete = Controlador.getSingletonInstance().getGestorEntregable().crearPaquete(Integer.parseInt(txt_id.getText()), 
+                            Double.parseDouble(txt_peso.getText()), 
+                            txt_descripcion.getText(), txt_remitente.getText(), 
+                            (String)cb_tipoPaquete.getSelectedItem(), 
+                            checkB_fragil.isSelected(), checkB_contElectronico.isSelected());
+                    
+                    boolean insertado = Controlador.getSingletonInstance()
+                            .getGestorEntregable().buscarEntregableEInsertar(paquete, casillero);
+                    
+                    if (!insertado) { //Si no lo insertó
+                        lbl_error.setText("Ya existe un paquete con el mismo id.");
+                    }
+                    
+                    JOptionPane.showMessageDialog(this, "Se registró el paquete con éxito", "Paquete registrado", JOptionPane.INFORMATION_MESSAGE);
+                    
+                }
+                 mensajeError = mensajeError  + "El peso debe ser .\n";
             }
-            mensajeError = mensajeError  + "No se debe dejar espacios en blanco.\n";
+            mensajeError = mensajeError  + "El id debe ser un número entero.\n";
         }
             mensajeError = mensajeError  + "No se debe dejar espacios en blanco.\n";
+            
+        lbl_error.setText(mensajeError);
         
     }//GEN-LAST:event_btn_crearPaqueteActionPerformed
 

@@ -14,8 +14,13 @@ public class Paquete extends Entregable{
     private boolean fragil;
     private boolean contElectronico;
 
-    public Paquete() {
+    public Paquete(TPaquete tipoPaquete, boolean fragil, boolean contElectronico, int id, double peso, String descripcion, String remitente) {
+        super(id, peso, descripcion, remitente);
+        this.tipoPaquete = tipoPaquete;
+        this.fragil = fragil;
+        this.contElectronico = contElectronico;
     }
+
 
     public TPaquete getTipoPaquete() {
         return tipoPaquete;
